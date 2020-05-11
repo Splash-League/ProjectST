@@ -52,6 +52,8 @@ protected:
 	virtual void BeginPlay();
 
 public:
+
+	ENetRole currentRole;
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -83,6 +85,7 @@ public:
 protected:
 	
 	/** Fires a projectile. */
+	UFUNCTION(Server, Reliable)
 	void OnFire();
 
 	/** Resets HMD orientation and position in VR. */
