@@ -78,7 +78,7 @@ void UMyGameInstance::CreateServer()
 	SessionSettings.bUsesPresence = true;
 	SessionSettings.NumPublicConnections = 5;
 
-	SessionInterface->CreateSession(0, FName("My Sessin"), SessionSettings);
+	SessionInterface->CreateSession(0, FName("My Session"), SessionSettings);
 }
 
 void UMyGameInstance::JoinServer()
