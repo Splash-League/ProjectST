@@ -4,6 +4,10 @@
 #include "ProjectSTHUD.h"
 #include "ProjectSTCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "MyPlayerState.h"
+#include "MyPlayerController.h"
+#include "MyGameState.h"
+
 
 AProjectSTGameMode::AProjectSTGameMode()
 	: Super()
@@ -14,4 +18,9 @@ AProjectSTGameMode::AProjectSTGameMode()
 
 	// use our custom HUD class
 	HUDClass = AProjectSTHUD::StaticClass();
+}
+
+void AProjectSTGameMode::PostLogin(APlayerController* NewPlayer)
+{
+	Super::PostLogin(NewPlayer);
 }

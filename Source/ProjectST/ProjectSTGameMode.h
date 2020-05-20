@@ -13,6 +13,8 @@ class AProjectSTGameMode : public AGameModeBase
 
 public:
 	AProjectSTGameMode();
+
+	virtual void PostLogin(APlayerController* NewPlayer) override;
 };
 
 
