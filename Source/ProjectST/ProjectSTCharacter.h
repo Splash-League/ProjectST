@@ -68,7 +68,8 @@ public:
 
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category=Projectile)
-	TSubclassOf<class AProjectSTProjectile> ProjectileClass;
+	//TSubclassOf<class AProjectSTProjectile> ProjectileClass;
+	TSubclassOf<class AActor> ProjectileClass;
 
 	/** Sound to play each time we fire */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
@@ -86,6 +87,10 @@ protected:
 	
 	/** Fires a projectile. */
 	UFUNCTION(Server, Reliable)
+	void ServerOnFire();
+
+	void PlayGunInformation();
+
 	void OnFire();
 
 	/** Resets HMD orientation and position in VR. */
