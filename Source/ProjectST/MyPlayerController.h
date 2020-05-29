@@ -13,5 +13,20 @@ UCLASS()
 class PROJECTST_API AMyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+public:
+	void SpawnPlayer();
+
+	UFUNCTION(Server, Reliable)
+		void ServerTeamSelect(bool team);
+
+	UFUNCTION(Server, Reliable)
+		void ServerSpawn();
+
+	UFUNCTION(BlueprintCallable)
+	void teamA();
+
+	UFUNCTION(BlueprintCallable)
+	void teamB();
 	
 };

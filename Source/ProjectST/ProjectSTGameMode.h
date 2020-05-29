@@ -2,6 +2,7 @@
 
 #pragma once
 
+//#include "MyPlayerController.h"
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "ProjectSTGameMode.generated.h"
@@ -14,7 +15,15 @@ class AProjectSTGameMode : public AGameModeBase
 public:
 	AProjectSTGameMode();
 
-	virtual void PostLogin(APlayerController* NewPlayer) override;
+	void PostLogin(APlayerController* NewPlayer) override;
+
+	void TeamA(class AMyPlayerController* NewPlayer);
+
+	void TeamB(class AMyPlayerController* NewPlayer);
+	
+	AActor * ChoosePlayerStart(AController * Player);
+
+	bool ShouldSpawnAtStartSpot(AController * Player) override { return false; };
 };
 
 
