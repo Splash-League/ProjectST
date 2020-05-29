@@ -15,5 +15,5 @@ class PROJECTST_API AMyPlayerState : public APlayerState
 	GENERATED_BODY()
 public:
 	UPROPERTY(Replicated)
-		bool bTeamA;
+		bool bTeamA = true;
 };

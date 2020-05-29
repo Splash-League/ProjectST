@@ -18,7 +18,7 @@ UMyGameInstance::UMyGameInstance()
 	{
 		FMapInfo Map;
 		Map.MapName = "First Person Example Map";
-		Map.MapURL = "/Game/FirstPersonCPP/Maps/FirstPersonExampleMap";
+		Map.MapURL = "/Game/Test/DevMap";
 		Map.MapImage = Map1Image.Object;
 		MapList.Add(Map);
 		SelectedMapURL = Map.MapURL;
