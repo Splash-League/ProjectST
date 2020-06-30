@@ -120,6 +120,11 @@ void AProjectSTCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
 	// Bind fire event
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AProjectSTCharacter::OnFire);
 
+	// Bind switch guns
+	PlayerInputComponent->BindAction("Weapon1", IE_Pressed, this, &AProjectSTCharacter::WeaponOne);
+	PlayerInputComponent->BindAction("Weapon2", IE_Pressed, this, &AProjectSTCharacter::WeaponTwo);
+	PlayerInputComponent->BindAction("Weapon3", IE_Pressed, this, &AProjectSTCharacter::WeaponThree);
+
 	// Enable touchscreen input
 	EnableTouchscreenMovement(PlayerInputComponent);
 
@@ -141,6 +146,19 @@ void AProjectSTCharacter::SetupPlayerInputComponent(class UInputComponent* Playe
 void AProjectSTCharacter::ServerOnFire_Implementation()
 {
 	OnFire();
+}
+
+void AProjectSTCharacter::ServerChangeWeapon_Implementation(uint8 weaponValue) {
+	if (weaponValue == 0)
+	{
+		WeaponOne();
+	}
+	if (weaponValue == 1) {
+		WeaponTwo();
+	}
+	if (weaponValue == 2) {
+		WeaponThree();
+	}
 }
 
 void AProjectSTCharacter::PlayGunInformation()
@@ -199,6 +217,39 @@ void AProjectSTCharacter::OnFire()
 			}
 		}
 		PlayGunInformation();
+	}
+}
+
+void AProjectSTCharacter::WeaponOne()
+{
+	if (!HasAuthority())
+	{
+		ServerChangeWeapon(0);
+	}
+	else {
+		ProjectileClass = BulletsArray[0];
+	}
+}
+
+void AProjectSTCharacter::WeaponTwo()
+{
+	if (!HasAuthority())
+	{
+		ServerChangeWeapon(1);
+	}
+	else {
+		ProjectileClass = BulletsArray[1];
+	}
+}
+
+void AProjectSTCharacter::WeaponThree()
+{
+	if (!HasAuthority())
+	{
+		ServerChangeWeapon(2);
+	}
+	else {
+		ProjectileClass = BulletsArray[2];
 	}
 }
 

@@ -68,7 +68,9 @@ public:
 
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category=Projectile)
-	//TSubclassOf<class AProjectSTProjectile> ProjectileClass;
+	TArray<TSubclassOf<class AActor>> BulletsArray;
+	//TArray<class AActor*> BulletsArray;
+	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 	TSubclassOf<class AActor> ProjectileClass;
 
 	/** Sound to play each time we fire */
@@ -89,9 +91,16 @@ protected:
 	UFUNCTION(Server, Reliable)
 	void ServerOnFire();
 
+	UFUNCTION(Server, Reliable)
+	void ServerChangeWeapon(uint8 weaponValue);
+
 	void PlayGunInformation();
 
 	void OnFire();
+
+	void WeaponOne();
+	void WeaponTwo();
+	void WeaponThree();
 
 	/** Resets HMD orientation and position in VR. */
 	void OnResetVR();
