@@ -14,6 +14,9 @@ class PROJECTST_API AMyPlayerState : public APlayerState
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(Replicated)
-		bool bTeamA = true;
+	UPROPERTY(Replicated, EditAnywhere, Category = Team)
+	bool bTeamA = true;
+
+	UFUNCTION(BlueprintCallable)
+	bool CurrentTeam();
 };
