@@ -9,6 +9,7 @@
 #include "MyGameState.h"
 #include "MyPlayerState.h"
 #include "MyPlayerStart.h"
+#include "EngineUtils.h"
 
 AProjectSTGameMode::AProjectSTGameMode()
 	: Super()
@@ -21,6 +22,7 @@ AProjectSTGameMode::AProjectSTGameMode()
 	HUDClass = AProjectSTHUD::StaticClass();
 
 	PlayerStateClass = AMyPlayerState::StaticClass();
+	
 }
 
 void AProjectSTGameMode::PostLogin(APlayerController* NewPlayer)
@@ -67,15 +69,24 @@ AActor * AProjectSTGameMode::ChoosePlayerStart(AController * Player)
 		if (PS)
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Successfully getting inside chooserPlayerStart and PS coming back positive"));
-			//TArray<AMyPlayerStart *> Starts;
-			//for (TActorIterator<AMyPlayerState> StartItr(GetWorld()); StartItr; ++StartItr)
-			//{
-			//	if (StartItr->bTeamA == PS->bTeamA)
-			//	{
-			//		Starts.Add(*StartItr);
-			//	}
-			//}
-			//return Starts[FMath::RandRange(0, Starts.Num() - 1)];
+			TArray<class AMyPlayerStart *> TeamAStart;
+			TArray<class AMyPlayerStart *> TeamBStart;
+			for (TActorIterator<AMyPlayerStart> StartItr(GetWorld()); StartItr; ++StartItr)
+			{
+				if (StartItr->PlayerStartTag == "TeamA")
+				{
+					TeamAStart.Add(*StartItr);
+				}
+				else { TeamBStart.Add(*StartItr); }
+			}
+			if (PS->bTeamA == true) {
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Team A"));
+				return TeamAStart[FMath::RandRange(0, TeamAStart.Num() - 1)];
+			}
+			else{ 
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Team B"));
+				return TeamBStart[FMath::RandRange(0, TeamBStart.Num() - 1)]; 
+			}
 		}
 	}
 	return NULL;

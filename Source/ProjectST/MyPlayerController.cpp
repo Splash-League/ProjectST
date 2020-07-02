@@ -17,7 +17,8 @@ void AMyPlayerController::SpawnPlayer()
 		AGameModeBase * GameMode = GetWorld()->GetAuthGameMode();
 		if (GameMode)
 		{
-			APawn * NewPawn = GameMode->SpawnDefaultPawnFor(this, GameMode->ChoosePlayerStart(this));
+			AProjectSTGameMode * PlayerGameMode = Cast<AProjectSTGameMode>(GetWorld()->GetAuthGameMode());
+			APawn * NewPawn = GameMode->SpawnDefaultPawnFor(this, PlayerGameMode->ChoosePlayerStart(this));
 			//APawn * NewPawn = GetWorld()->SpawnActor(AProjectSTCharacter FirstPersonCharacter, GameMode->ChoosePlayerStart(this));
 			Possess(NewPawn);
 		}
@@ -47,6 +48,7 @@ void AMyPlayerController::teamA()
 		ServerTeamSelect(true);
 	}
 	else {
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Team A"));
 		AProjectSTGameMode * GameMode = Cast<AProjectSTGameMode>(GetWorld()->GetAuthGameMode());
 		GameMode->TeamA(this);
 	}
@@ -60,6 +62,7 @@ void AMyPlayerController::teamB()
 		ServerTeamSelect(false);
 	}
 	else {
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Team B"));
 		AProjectSTGameMode * GameMode = Cast<AProjectSTGameMode>(GetWorld()->GetAuthGameMode());
 		GameMode->TeamB(this);
 	}

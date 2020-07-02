@@ -9,3 +9,11 @@ void AMyPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> & OutL
 
 	DOREPLIFETIME(AMyPlayerState, bTeamA);
 }
+
+bool AMyPlayerState::CurrentTeam()
+{
+	if (bTeamA == true) {
+		return true;
+	}
+	else { return false; }
+}
